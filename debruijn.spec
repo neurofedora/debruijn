@@ -21,6 +21,8 @@ BuildRequires:  fftw-devel
 
 %prep
 %autosetup -n DeBruijn-%{commit}
+# drop precompiled binary
+rm -f %{name}
 mkdir build
 
 %build
@@ -34,13 +36,15 @@ pushd build
   %make_install
 popd
 
+%check
+%{buildroot}%{_bindir} -v 3 2
+
 %files
 # zbyszek: ignatenkobrain: Yeah, the copying file seems to be wrong. I think the headers are the authorative source.
 # zbyszek: I seems to be based on http://webdocs.cs.ualberta.ca/~joe/Theses/HCarchive/conditions.html, which bsd 4-clause.
 # zbyszek: The proper name seems to be "BSD with advertising" according to https://fedoraproject.org/wiki/Licensing:Main?rd=Licensing#Good_Licenses.
 # https://github.com/gkaguirrelab/DeBruijn/issues/1
 #license LICENSE
-%doc README.md
 %{_bindir}/%{name}
 
 %changelog
