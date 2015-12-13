@@ -24,6 +24,7 @@ BuildRequires:  fftw-devel
 # drop precompiled binary
 rm -f %{name}
 mkdir build
+chmod -x *
 
 %build
 pushd build
